@@ -1,4 +1,4 @@
-# Gestion des Formations enligne - JavaFX Application
+# Gestion des Formations en ligne - JavaFX Application
 
 A desktop application for managing employees and their training, built with JavaFX, MySQL, and Maven.
 
