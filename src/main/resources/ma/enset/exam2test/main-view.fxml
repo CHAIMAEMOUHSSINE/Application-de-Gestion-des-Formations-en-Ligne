@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ma.enset.exam2test.Controllers.MainController">
+   <top>
+      <VBox>
+         <!-- Menu Bar moderne -->
+         <MenuBar styleClass="bg-dark">
+            <Menu styleClass="text-light" text="📁 Fichier">
+               <MenuItem onAction="#exporterEmployes" text="📊 Exporter Employés CSV" />
+               <SeparatorMenuItem />
+               <MenuItem onAction="#quitter" text="🚪 Quitter" />
+            </Menu>
+            <Menu styleClass="text-light" text="🛠️ Outils">
+               <MenuItem onAction="#parametres" text="⚙️ Paramètres" />
+               <MenuItem onAction="#statistiques" text="📈 Statistiques" />
+            </Menu>
+            <Menu styleClass="text-light" text="❓ Aide">
+               <MenuItem onAction="#aPropos" text="ℹ️ À propos" />
+               <MenuItem onAction="#documentation" text="📖 Documentation" />
+            </Menu>
+         </MenuBar>
+
+         <!-- Toolbar moderne avec gradient -->
+         <ToolBar styleClass="bg-light" style="-fx-background-color: linear-gradient(to bottom, #f8f9fa, #e9ecef); -fx-padding: 10;">
+            <HBox spacing="15.0" alignment="CENTER_LEFT">
+               <Button onAction="#actualiser" styleClass="btn,btn-outline-primary,btn-sm" text="🔄 Actualiser" />
+               <Separator orientation="VERTICAL" />
+
+               <!-- Zone de recherche globale -->
+               <VBox spacing="2.0">
+                  <Label styleClass="text-muted,small" text="Recherche globale:" />
+                  <HBox spacing="10.0" alignment="CENTER_LEFT">
+                     <TextField fx:id="rechercheField" onKeyReleased="#rechercher"
+                               promptText="🔍 Rechercher dans toute l'application..."
+                               styleClass="form-control" style="-fx-background-radius: 20;"
+                               prefWidth="300.0" />
+                     <Button onAction="#effacerRecherche" styleClass="btn,btn-outline-secondary,btn-sm" text="🗑️" />
+                  </HBox>
+               </VBox>
+
+               <Region HBox.hgrow="ALWAYS" />
+
+               <!-- Indicateurs de statut -->
+               <VBox spacing="2.0" alignment="CENTER_RIGHT">
+                  <Label styleClass="text-muted,small" text="Statut:" />
+                  <HBox spacing="10.0" alignment="CENTER_RIGHT">
+                     <Label fx:id="connexionStatus" styleClass="badge,badge-success" text="🟢 Connecté" />
+                     <Label fx:id="derniereMaj" styleClass="text-muted,small" text="Mis à jour: maintenant" />
+                  </HBox>
+               </VBox>
+            </HBox>
+         </ToolBar>
+      </VBox>
+   </top>
+   <center>
+      <!-- TabPane avec style moderne -->
+      <TabPane fx:id="tabPane" tabClosingPolicy="UNAVAILABLE"
+               styleClass="card" style="-fx-background-radius: 0; -fx-border-radius: 0;">
+         <Tab styleClass="tab-primary" text="👥 Employés">
+            <fx:include source="employe.fxml" />
+         </Tab>
+         <Tab styleClass="tab-success" text="🎓 Formations">
+            <fx:include source="formation.fxml" />
+         </Tab>
+         <Tab styleClass="tab-info" text="📊 Statistiques">
+            <VBox spacing="20.0" alignment="CENTER" styleClass="container-fluid">
+               <Label styleClass="h3,text-info" text="📊 Tableau de Bord" />
+
+               <!-- Cartes de statistiques -->
+               <HBox spacing="20.0" alignment="CENTER">
+                  <VBox spacing="10.0" alignment="CENTER" styleClass="card" style="-fx-padding: 20; -fx-min-width: 200;">
+                     <Label styleClass="h1,text-primary" text="👥" />
+                     <Label fx:id="totalEmployes" styleClass="h2,text-primary" text="0" />
+                     <Label styleClass="text-muted" text="Total Employés" />
+                  </VBox>
+
+                  <VBox spacing="10.0" alignment="CENTER" styleClass="card" style="-fx-padding: 20; -fx-min-width: 200;">
+                     <Label styleClass="h1,text-success" text="🎓" />
+                     <Label fx:id="totalFormations" styleClass="h2,text-success" text="0" />
+                     <Label styleClass="text-muted" text="Total Formations" />
+                  </VBox>
+
+                  <VBox spacing="10.0" alignment="CENTER" styleClass="card" style="-fx-padding: 20; -fx-min-width: 200;">
+                     <Label styleClass="h1,text-warning" text="📝" />
+                     <Label fx:id="totalInscriptions" styleClass="h2,text-warning" text="0" />
+                     <Label styleClass="text-muted" text="Total Inscriptions" />
+                  </VBox>
+               </HBox>
+
+               <Label styleClass="text-muted" text="Dernière mise à jour: maintenant" />
+            </VBox>
+         </Tab>
+      </TabPane>
+   </center>
+   <bottom>
+      <HBox alignment="CENTER_LEFT" spacing="10.0">
+         <padding>
+            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+         </padding>
+         <Label fx:id="statusLabel" text="Prêt" />
+         <Region HBox.hgrow="ALWAYS" />
+         <ProgressBar fx:id="progressBar" prefWidth="200.0" visible="false" />
+         <Label fx:id="progressLabel" visible="false" />
+      </HBox>
+   </bottom>
+</BorderPane>
